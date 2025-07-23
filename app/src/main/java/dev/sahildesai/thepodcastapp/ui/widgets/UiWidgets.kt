@@ -1,0 +1,26 @@
+package dev.sahildesai.thepodcastapp.ui.widgets
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import coil.compose.AsyncImage
+import dev.sahildesai.thepodcastapp.R
+
+
+@Composable
+fun LoadImageFromUrl(
+    modifier: Modifier = Modifier,
+    title: String,
+    imageUrl: String,
+    contentScale: ContentScale = ContentScale.Crop
+){
+    AsyncImage(
+        model = imageUrl,
+        error = painterResource(R.drawable.ic_error),
+        contentDescription = title,
+        modifier = modifier,
+        contentScale = contentScale,
+        placeholder = painterResource(R.drawable.ic_downloading),
+    )
+}

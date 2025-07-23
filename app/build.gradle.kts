@@ -64,7 +64,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
-
+   // implementation(libs.coil.compose)
+    //implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.kt.coil.compose) // or newer
     // pagination
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
