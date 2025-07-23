@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.sahildesai.thepodcastapp.data.api.PodcastApiService
+import dev.sahildesai.thepodcastapp.data.api.PodcastRemoteSource
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -58,4 +59,10 @@ object NetworkModule {
     fun provideApiService(
         retrofit: Retrofit
     ): PodcastApiService = retrofit.create(PodcastApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun providePodcastRemoteSource(
+       podcastApiService: PodcastApiService
+    ): PodcastRemoteSource = PodcastRemoteSource(podcastApiService)
 }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
 }
 
@@ -43,7 +44,6 @@ android {
 
 dependencies {
 
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -53,7 +53,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-
+    implementation(libs.androidx.work.runtime.ktx)
     //Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
@@ -68,6 +68,8 @@ dependencies {
     // pagination
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
+
+    implementation(libs.kotlinx.serialization.json)
 
     //Test
     testImplementation(libs.junit)
