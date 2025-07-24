@@ -5,9 +5,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.sahildesai.thepodcastapp.domain.usecase.GetFavoritePodcastIdsUseCase
-import dev.sahildesai.thepodcastapp.domain.usecase.GetPodcastUseCase
+import dev.sahildesai.thepodcastapp.domain.usecase.GetPodcastsUseCase
 import dev.sahildesai.thepodcastapp.domain.usecase.IGetFavoritePodcastIdsUseCase
-import dev.sahildesai.thepodcastapp.domain.usecase.IGetPodcastUseCase
+import dev.sahildesai.thepodcastapp.domain.usecase.IGetPodcastsUseCase
 import dev.sahildesai.thepodcastapp.domain.usecase.IToggleFavoriteUseCase
 import dev.sahildesai.thepodcastapp.domain.usecase.ToggleFavoriteUseCase
 import dev.sahildesai.thepodcastapp.repository.IPodcastRepository
@@ -21,7 +21,7 @@ object UseCaseModule {
     @Provides
     fun provideGetPodcastsUseCase(
         repository: IPodcastRepository
-    ): IGetPodcastUseCase = GetPodcastUseCase(repository)
+    ): IGetPodcastsUseCase = GetPodcastsUseCase(repository)
 
     @Singleton
     @Provides

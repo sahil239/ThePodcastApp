@@ -18,6 +18,7 @@ class PodcastDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val podcastArg: PodcastModel = checkNotNull(savedStateHandle.toRoute<PodcastModel>())
+  //  private val podcastArg: PodcastModel = checkNotNull(savedStateHandle["arg"]) //checkNotNull(savedStateHandle.toRoute<PodcastModel>())
 
     private val _podcast = MutableStateFlow(podcastArg)
     val podcast = _podcast

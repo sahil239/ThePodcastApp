@@ -4,4 +4,4 @@ import androidx.paging.PagingData
 import dev.sahildesai.thepodcastapp.model.api.Podcast
 import kotlinx.coroutines.flow.Flow
 
-fun interface IGetPodcastUseCase: () -> Flow<PagingData<Podcast>>
+fun interface IGetPodcastsUseCase: () -> Flow<PagingData<Podcast>>

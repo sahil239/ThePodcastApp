@@ -1,8 +1,11 @@
 [versions]
 agp = "8.9.2"
+kotestAssertionsCore = "5.6.2"
 kotlin = "2.0.0"
 hilt = "2.51"
 hiltNavigationCompose = "1.2.0"
+kotlinxCoroutinesTest = "1.7.3"
+mockk = "1.13.4"
 navigationCompose = "2.9.2"
 pagination = "3.3.6"
 retrofit = "2.9.0"
@@ -14,6 +17,8 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
 composeBom = "2025.05.00"
+slf4jSimple = "2.0.7"
+turbine = "1.0.0"
 workRuntimeKtx = "2.10.2"
 kotlinxSerialization = "1.7.3"
 coil = "2.5.0"
@@ -42,6 +47,9 @@ androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltNa
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagination" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagination" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotestAssertionsCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
@@ -50,6 +58,10 @@ coil-kt-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-paging-common-ktx = { module = "androidx.paging:paging-common-ktx", version.ref = "pagination" }
+androidx-paging-testing = { module = "androidx.paging:paging-testing", version.ref = "pagination" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

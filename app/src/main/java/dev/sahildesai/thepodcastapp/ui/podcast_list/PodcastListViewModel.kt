@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.sahildesai.thepodcastapp.domain.usecase.IGetFavoritePodcastIdsUseCase
-import dev.sahildesai.thepodcastapp.domain.usecase.IGetPodcastUseCase
+import dev.sahildesai.thepodcastapp.domain.usecase.IGetPodcastsUseCase
 import dev.sahildesai.thepodcastapp.model.common.PodcastModel
 import dev.sahildesai.thepodcastapp.model.toUIModel
 import kotlinx.coroutines.flow.Flow
@@ -16,13 +16,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PodcastListViewModel @Inject constructor(
-    getPodcastUseCase: IGetPodcastUseCase,
+    getPodcastsUseCase: IGetPodcastsUseCase,
     getFavoritePodcastIdsUseCase: IGetFavoritePodcastIdsUseCase,
 ) : ViewModel(){
 
     val favoriteIdsFlow: Flow<List<String>> = getFavoritePodcastIdsUseCase()
 
-    val podcastPagingFlow = getPodcastUseCase().cachedIn(viewModelScope)
+    val podcastPagingFlow = getPodcastsUseCase().cachedIn(viewModelScope)
 
     val podcasts: Flow<PagingData<PodcastModel>> = combine(
         podcastPagingFlow,

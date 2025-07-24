@@ -81,7 +81,14 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     //Test
-    testImplementation(libs.junit)
+    testImplementation (libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation (libs.mockk)
+    testImplementation (libs.slf4j.simple)
+    testImplementation (libs.kotest.assertions.core)
+    testImplementation (libs.turbine)
+    testImplementation(libs.androidx.paging.common.ktx)
+    testImplementation(libs.androidx.paging.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

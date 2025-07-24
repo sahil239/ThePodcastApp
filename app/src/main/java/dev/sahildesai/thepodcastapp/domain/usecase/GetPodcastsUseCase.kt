@@ -6,9 +6,9 @@ import dev.sahildesai.thepodcastapp.repository.IPodcastRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetPodcastUseCase @Inject constructor(
+class GetPodcastsUseCase @Inject constructor(
     private val repository: IPodcastRepository
-): IGetPodcastUseCase {
+): IGetPodcastsUseCase {
     override fun invoke(): Flow<PagingData<Podcast>> {
         return repository.getPodcasts()
     }
