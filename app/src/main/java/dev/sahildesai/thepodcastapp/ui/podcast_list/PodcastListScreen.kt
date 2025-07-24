@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,8 +29,8 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import dev.sahildesai.thepodcastapp.model.common.PodcastModel
-import dev.sahildesai.thepodcastapp.ui.navigation.PodcastDetails
 import dev.sahildesai.thepodcastapp.ui.widgets.LoadImageFromUrl
+import dev.sahildesai.thepodcastapp.ui.widgets.LoadingData
 
 @Composable
 fun PodcastListScreen(
@@ -61,8 +62,8 @@ fun PodcastListScreen(
                     items(podcasts.itemCount) { index ->
                         podcasts[index]?.let {
                             PodcastListItem(it) {
-                                navController.navigate(PodcastDetails(it))
-                                viewModel.toggleFavorite(it.id, !it.isFavorite)
+                                navController.navigate(it)
+                               // viewModel.toggleFavorite(it.id, !it.isFavorite)
                             }
                         }
                     }
@@ -83,21 +84,20 @@ fun PodcastListScreen(
                                     ErrorUI(error.error.message.toString())
                                 }
                             }
+                            (loadState.append is LoadState.NotLoading && loadState.append.endOfPaginationReached) -> {
+                                item {
+                                    Text(
+                                        text = "End of Data",
+                                        modifier = Modifier.padding(bottom = 24.dp).fillMaxWidth(),
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun LoadingData(){
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        CircularProgressIndicator()
     }
 }
 

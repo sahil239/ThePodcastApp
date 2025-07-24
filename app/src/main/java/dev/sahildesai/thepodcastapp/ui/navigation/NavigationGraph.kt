@@ -13,16 +13,13 @@ import dev.sahildesai.thepodcastapp.ui.podcast_list.PodcastListScreen
 @Serializable
 object PodcastList
 
-@Serializable
-class PodcastDetails(val podcastModel: PodcastModel)
-
 @Composable
 fun NavigationGraph(navController: NavHostController){
     NavHost(navController, startDestination = PodcastList){
         composable<PodcastList>{
             PodcastListScreen(navController)
         }
-        composable<PodcastDetails> {
+        composable<PodcastModel> {
             PodcastDetailsScreen(navController)
         }
 

@@ -8,5 +8,6 @@ fun Podcast.toUIModel(isFavourite: Boolean = false) = PodcastModel(
     title = title,
     thumbnail = thumbnail,
     publisher = publisher,
+    description = description,
     isFavorite = isFavourite
 )
