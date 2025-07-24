@@ -12,12 +12,18 @@ android {
     namespace = "dev.sahildesai.thepodcastapp"
     compileSdk = 35
 
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    
     defaultConfig {
         applicationId = "dev.sahildesai.thepodcastapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "BASE_URL", "\"https://listen-api-test.listennotes.com/api/v2/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,9 +43,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
     }
     room {
         schemaDirectory("$projectDir/schemas")

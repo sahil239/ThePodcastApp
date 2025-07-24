@@ -2,7 +2,6 @@ package dev.sahildesai.thepodcastapp.ui.podcast_list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,13 +50,9 @@ fun PodcastListScreen(
         when (val refreshState = loadState.refresh) {
             is LoadState.Error -> {
                 // Full-screen error UI
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ErrorUI(refreshState.error.message ?: "Unknown error")
-                }
+
+                ErrorUI(refreshState.error.message ?: "Unknown error")
+
             } else -> {
                 LazyColumn {
                     items(podcasts.itemCount) { index ->
@@ -158,8 +152,8 @@ private fun PodcastListItem(
 
 @Composable
 private fun ErrorUI(message: String){
-    Column (modifier = Modifier.fillMaxSize()){
-        Text(message)
+    Column (modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+        Text(message, textAlign = TextAlign.Center)
     }
 }
 

@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.sahildesai.thepodcastapp.BuildConfig
 import dev.sahildesai.thepodcastapp.data.api.PodcastApiService
 import dev.sahildesai.thepodcastapp.data.api.PodcastRemoteSource
 import okhttp3.Interceptor
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://listen-api-test.listennotes.com/api/v2/"
+    private const val BASE_URL = BuildConfig.BASE_URL
 
     @Singleton
     @Provides
