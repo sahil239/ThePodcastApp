@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -63,7 +65,13 @@ fun PodcastListScreen(
                         podcasts[index]?.let {
                             PodcastListItem(it) {
                                 navController.navigate(it)
-                               // viewModel.toggleFavorite(it.id, !it.isFavorite)
+                            }
+                            if (index < podcasts.itemCount - 1) {
+                                HorizontalDivider(
+                                    modifier = Modifier.padding(horizontal = 16.dp),
+                                    color = Color.LightGray,
+                                    thickness = 0.5.dp
+                                )
                             }
                         }
                     }

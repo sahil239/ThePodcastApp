@@ -76,7 +76,8 @@ private fun PodcastDetailScreen(
             Text(
                 text = podcast.title,
                 style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
             )
 
             Text(
