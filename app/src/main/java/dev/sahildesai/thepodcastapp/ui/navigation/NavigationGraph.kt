@@ -5,11 +5,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import kotlinx.serialization.Serializable
 import androidx.navigation.compose.composable
+import dev.sahildesai.thepodcastapp.model.common.PodcastModel
+import dev.sahildesai.thepodcastapp.ui.podcast_details.PodcastDetailsScreen
 import dev.sahildesai.thepodcastapp.ui.podcast_list.PodcastListScreen
 
 
 @Serializable
 object PodcastList
+
+@Serializable
+class PodcastDetails(val podcastModel: PodcastModel)
 
 @Composable
 fun NavigationGraph(navController: NavHostController){
@@ -17,5 +22,9 @@ fun NavigationGraph(navController: NavHostController){
         composable<PodcastList>{
             PodcastListScreen(navController)
         }
+        composable<PodcastDetails> {
+            PodcastDetailsScreen(navController)
+        }
+
     }
 }

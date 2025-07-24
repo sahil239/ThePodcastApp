@@ -27,7 +27,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import dev.sahildesai.thepodcastapp.model.api.Podcast
+import dev.sahildesai.thepodcastapp.model.common.PodcastModel
+import dev.sahildesai.thepodcastapp.ui.navigation.PodcastDetails
 import dev.sahildesai.thepodcastapp.ui.widgets.LoadImageFromUrl
 
 @Composable
@@ -35,36 +36,53 @@ fun PodcastListScreen(
     navController: NavController,
     viewModel: PodcastListViewModel = hiltViewModel()
 ){
-    val podcasts = viewModel.podcastFlow.collectAsLazyPagingItems()
+    val podcasts = viewModel.podcasts.collectAsLazyPagingItems()
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
+    Column(Modifier.fillMaxSize().background(Color.White).padding(24.dp)) {
         Text(
             text = "Podcasts",
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 12.dp)
         )
-        LazyColumn {
-            items(podcasts.itemCount) { index ->
-                podcasts[index]?.let {
-                    PodcastListItem(it) {
-                    }
+        val loadState = podcasts.loadState
+
+        when (val refreshState = loadState.refresh) {
+            is LoadState.Error -> {
+                // Full-screen error UI
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ErrorUI(refreshState.error.message ?: "Unknown error")
                 }
-            }
-
-            podcasts.apply {
-                when {
-                    loadState.refresh is LoadState.Loading -> {
-                        item { LoadingData() }
+            } else -> {
+                LazyColumn {
+                    items(podcasts.itemCount) { index ->
+                        podcasts[index]?.let {
+                            PodcastListItem(it) {
+                                navController.navigate(PodcastDetails(it))
+                                viewModel.toggleFavorite(it.id, !it.isFavorite)
+                            }
+                        }
                     }
 
-                    loadState.append is LoadState.Loading -> {
-                        item { LoadingData() }
-                    }
+                    podcasts.apply {
+                        when {
+                            loadState.refresh is LoadState.Loading -> {
+                                item { LoadingData() }
+                            }
 
-                    loadState.append is LoadState.Error -> {
-                        val error = loadState.append as LoadState.Error
-                        item {
-                            Text("Error: ${error.error.message}")
+                            loadState.append is LoadState.Loading -> {
+                                item { LoadingData() }
+                            }
+
+                            loadState.append is LoadState.Error -> {
+                                val error = loadState.append as LoadState.Error
+                                item {
+                                    ErrorUI(error.error.message.toString())
+                                }
+                            }
                         }
                     }
                 }
@@ -84,8 +102,8 @@ fun LoadingData(){
 }
 
 @Composable
-fun PodcastListItem(
-    podcast: Podcast,
+private fun PodcastListItem(
+    podcast: PodcastModel,
     onClick: () -> Unit
 ) {
     Row(
@@ -119,14 +137,21 @@ fun PodcastListItem(
                 maxLines = 1
             )
 
-            //if (podcast.isFavourited) {
+            if (podcast.isFavorite) {
                 Text(
                     text = "Favourited",
                     color = Color.Red,
                     style = MaterialTheme.typography.labelMedium
                 )
-            //}
+            }
         }
+    }
+}
+
+@Composable
+private fun ErrorUI(message: String){
+    Column (modifier = Modifier.fillMaxSize()){
+        Text(message)
     }
 }
 
