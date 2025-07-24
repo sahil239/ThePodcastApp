@@ -14,6 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -37,6 +38,10 @@ import androidx.navigation.NavController
 import dev.sahildesai.thepodcastapp.model.common.PodcastModel
 import dev.sahildesai.thepodcastapp.ui.widgets.LoadImageFromUrl
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import dev.sahildesai.thepodcastapp.R
+import dev.sahildesai.thepodcastapp.utils.toAnnotatedHtml
 
 @Composable
 fun PodcastDetailsScreen(
@@ -55,10 +60,10 @@ private fun PodcastDetailScreen(
     onToggleFavorite: () -> Unit
 ) {
 
-    Column(modifier = Modifier.fillMaxSize().padding(top = 16.dp)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.White).padding(top = 16.dp)) {
         IconButton(onClick = onBack) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                painter = painterResource(R.drawable.ic_back_chevron),
                 contentDescription = "Back"
             )
         }
@@ -66,8 +71,9 @@ private fun PodcastDetailScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Text(
@@ -79,7 +85,8 @@ private fun PodcastDetailScreen(
             Text(
                 text = podcast.publisher,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Gray
+                color = Color.Gray,
+                fontStyle = FontStyle.Italic
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -88,7 +95,7 @@ private fun PodcastDetailScreen(
                 imageUrl = podcast.thumbnail,
                 title = podcast.title,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(0.75f)
                     .aspectRatio(1f)
                     .clip(RoundedCornerShape(12.dp))
                     .background(Color.LightGray),
@@ -127,7 +134,7 @@ private fun PodcastDetailScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = podcast.description,
+                text = podcast.description.toAnnotatedHtml(),
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.DarkGray,
                 lineHeight = 22.sp,
