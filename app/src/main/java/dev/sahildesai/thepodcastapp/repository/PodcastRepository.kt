@@ -19,20 +19,16 @@ class PodcastRepository @Inject constructor(
     private val podcastRemoteSource: PodcastRemoteSource,
     private val podcastDao: PodcastDao
 ): IPodcastRepository {
-    override fun getPodcasts(): Flow<PagingData<Podcast>> {
-        val pagingFlow = Pager(
+    override fun getPodcasts(): Flow<PagingData<Podcast>> =
+        Pager(
             config = PagingConfig(pageSize = 20),
             pagingSourceFactory = { podcastRemoteSource }
         ).flow
 
-        return pagingFlow
-    }
 
     override fun getFavoritePodcastIds(): Flow<List<String>> = podcastDao.getFavoriteIds()
 
-    override suspend fun isFavourite(podcastId: String): Boolean {
-        return podcastDao.isFavourite(podcastId)
-    }
+    override suspend fun isFavourite(podcastId: String): Boolean = podcastDao.isFavourite(podcastId)
 
     override suspend fun toggleFav(podcastId: String, isFavourite: Boolean) {
         if(isFavourite) {

@@ -1,6 +1,5 @@
 package dev.sahildesai.thepodcastapp.data.api
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.sahildesai.thepodcastapp.data.util.ApiResult
@@ -35,7 +34,6 @@ class PodcastRemoteSource @Inject constructor(
 
             }
             is ApiResult.Failure -> {
-                Log.d("PodcastRemoteSource", "Error: ${response.errorMessage}")
                 LoadResult.Error(Exception(response.errorMessage))
             }
         }
