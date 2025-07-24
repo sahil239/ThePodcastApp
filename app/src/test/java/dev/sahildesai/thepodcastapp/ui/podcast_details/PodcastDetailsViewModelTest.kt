@@ -22,9 +22,10 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PodcastDetailsViewModelTest {
+    private val fakePodcast = mockkPodcast(1).toUIModel()
     @get:Rule
     val savedStateHandleRule = SavedStateHandleRule<PodcastModel>(
-        mockkPodcast(1).toUIModel(),
+        fakePodcast,
         clazz = PodcastModel::class
     )
 
@@ -33,8 +34,6 @@ class PodcastDetailsViewModelTest {
     private lateinit var toggleFavoriteUseCase: IToggleFavoriteUseCase
 
     private lateinit var viewModel: PodcastDetailsViewModel
-
-    private val fakePodcast = mockkPodcast(1).toUIModel()
 
     @Before
     fun setUp() {
@@ -67,5 +66,19 @@ class PodcastDetailsViewModelTest {
         advanceUntilIdle()
         coVerify { toggleFavoriteUseCase("1", true) }
         viewModel.podcast.value.isFavorite shouldBe true
+    }
+
+    @Test
+    fun `toggleFavorite twice`() = runTest {
+        viewModel.podcast.value.isFavorite shouldBe false
+        viewModel.toggleFavorite()
+        advanceUntilIdle()
+        coVerify { toggleFavoriteUseCase("1", true) }
+        viewModel.podcast.value.isFavorite shouldBe true
+
+        viewModel.toggleFavorite()
+        advanceUntilIdle()
+        coVerify { toggleFavoriteUseCase("1", false) }
+        viewModel.podcast.value.isFavorite shouldBe false
     }
 }
