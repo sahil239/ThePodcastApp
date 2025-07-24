@@ -11,7 +11,6 @@ import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import dev.sahildesai.thepodcastapp.R
 
-
 @Composable
 fun LoadImageFromUrl(
     modifier: Modifier = Modifier,
@@ -28,7 +27,6 @@ fun LoadImageFromUrl(
         placeholder = painterResource(R.drawable.ic_downloading),
     )
 }
-
 
 @Composable
 fun LoadingData(){
